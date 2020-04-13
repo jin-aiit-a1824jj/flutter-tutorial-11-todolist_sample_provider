@@ -19,11 +19,7 @@ class TasksScreen extends StatelessWidget {
             builder: (context) => SingleChildScrollView(
               child:Container(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: AddTaskScreen((newTextTitle){
-                    print(newTextTitle);
-                    //Provider.of<TaskData>(context).tasks.add(Task(name: newTextTitle));
-                    Navigator.pop(context);
-                }),
+                child: AddTaskScreen(),
               ),
             ),
             isScrollControlled: true,
