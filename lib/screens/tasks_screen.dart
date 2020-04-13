@@ -10,8 +10,17 @@ class TasksScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
-        onPressed: (){
-          showModalBottomSheet(context: context, builder: (context)=>AddTaskScreen());
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => SingleChildScrollView(
+              child:Container(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen(),
+              ),
+            ),
+            isScrollControlled: true,
+          );
         },
       ),
       body: Column(
@@ -60,12 +69,11 @@ class TasksScreen extends StatelessWidget {
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0)),
               ),
-            child: TasksList(),
+              child: TasksList(),
             ),
           ),
         ],
       ),
     );
   }
-
 }
