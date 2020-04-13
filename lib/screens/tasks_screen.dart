@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:todolistsampel/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todolistsampel/models/task_data.dart';
 import 'package:todolistsampel/screens/add_task_screen.dart';
 import 'package:todolistsampel/widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  State createState() {
-    return _TasksScreen();
-  }
-}
+class TasksScreen extends StatelessWidget {
 
-class _TasksScreen extends State<TasksScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +20,9 @@ class _TasksScreen extends State<TasksScreen>{
               child:Container(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTaskScreen((newTextTitle){
-                  setState(() {
                     print(newTextTitle);
-                    tasks.add(Task(name: newTextTitle));
+                    //Provider.of<TaskData>(context).tasks.add(Task(name: newTextTitle));
                     Navigator.pop(context);
-                  });
                 }),
               ),
             ),
@@ -65,7 +58,7 @@ class _TasksScreen extends State<TasksScreen>{
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -83,17 +76,11 @@ class _TasksScreen extends State<TasksScreen>{
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0)),
               ),
-              child: TasksList(tasks),
+              child: TasksList(),
             ),
           ),
         ],
       ),
     );
   }
-
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
 }
