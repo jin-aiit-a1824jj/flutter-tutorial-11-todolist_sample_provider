@@ -3,10 +3,14 @@ import 'package:todolistsampel/models/task.dart';
 import 'package:todolistsampel/widgets/task_tile.dart';
 
 class TasksList extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return _TaskList();
   }
+
+  final List<Task> tasks;
+  TasksList(this.tasks);
 }
 
 class _TaskList extends State<TasksList> {
@@ -15,22 +19,17 @@ class _TaskList extends State<TasksList> {
     return ListView.builder(
       itemBuilder: (context, index) {
         return TaskTile(
-          taskTitle: tasks[index].name,
-          isChecked: tasks[index].isDone,
+          taskTitle: widget.tasks[index].name,
+          isChecked: widget.tasks[index].isDone,
           checkboxCallback: (newValue) {
             setState(() {
-              tasks[index].toggleDone();
+              widget.tasks[index].toggleDone();
             });
           },
         );
       },
-      itemCount: tasks.length,
+      itemCount: widget.tasks.length,
     );
   }
 
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
 }

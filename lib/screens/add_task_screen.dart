@@ -26,6 +26,9 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (newText){
+                newTaskTitle = newText;
+              },
             ),
             FlatButton(
               child: Text(
@@ -36,7 +39,7 @@ class AddTaskScreen extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-
+                addTaskCallback(newTaskTitle);
               },
             ),
           ],
@@ -44,4 +47,9 @@ class AddTaskScreen extends StatelessWidget {
       ),
     );
   }
+
+  String newTaskTitle;
+  final Function addTaskCallback;
+
+  AddTaskScreen(this.addTaskCallback);
 }
